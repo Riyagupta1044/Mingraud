@@ -14,4 +14,4 @@ COPY src ./src
 
 RUN mvn dependency:resolve
 
-CMD ["mvn", "javafx:run"]
+CMD ["mvn", "-e", "javafx:run"]
