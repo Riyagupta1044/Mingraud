@@ -6,9 +6,12 @@ COPY src ./src
 
 RUN mvn clean package -DskipTests
 
-FROM eclipse-temurin:21-jre
+FROM maven:3.9-eclipse-temurin-21
 WORKDIR /app
 
-COPY --from=build /app/target/*.jar app.jar
+COPY pom.xml .
+COPY src ./src
 
-CMD ["java", "-jar", "app.jar"]
+RUN mvn dependency:resolve
+
+CMD ["mvn", "javafx:run"]
